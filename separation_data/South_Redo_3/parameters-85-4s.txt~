@@ -1,0 +1,62 @@
+number_parameters: 4
+background_weight: 0.99
+background_weight_step: 0.000001
+background_weight_min: 0.8
+background_weight_max: 1.0
+optimize_background_weight: 1
+background_parameters[4]: 1.0, 0.34217373320392042, 25.9517910846623, 1.0
+background_step[4]: 0.02, 0.000004, 0.00008, 0.02
+background_min[4]: 0.0, 0.25, 1.0, 0.1
+background_max[4]: 3.0, 1.75, 30.0, 3.0
+optimize_parameter[4]: 0, 1, 0, 0
+number_streams: 4, 5
+stream_weight: -2.1
+stream_weight_step: 0.000001
+stream_weight_min: -20.0
+stream_weight_max: 20.0
+optimize_weight: 1
+stream_parameters[5]: 380.0, 15.0, 2.21, 0.32, 2.7
+stream_step[5]: 0.00003, 0.00004, 0.00006, 0.00004, 0.000004
+stream_min[5]: 350.0, 2.0, 0.0, 0.0, 0.1
+stream_max[5]: 400.0, 100.0, 3.14, 3.14, 25.0
+optimize_parameter[5]: 1, 1, 1, 1, 1
+stream_weight: -2.1
+stream_weight_step: 0.000001
+stream_weight_min: -20.0
+stream_weight_max: 20.0
+optimize_weight: 1
+stream_parameters[5]: 380.0, 15.0, 2.21, 0.32, 2.7
+stream_step[5]: 0.00003, 0.00004, 0.00006, 0.00004, 0.000004
+stream_min[5]: 350.0, 2.0, 0.0, 0.0, 0.1
+stream_max[5]: 400.0, 100.0, 3.14, 3.14, 25.0
+optimize_parameter[5]: 1, 1, 1, 1, 1
+stream_weight: -2.1
+stream_weight_step: 0.000001
+stream_weight_min: -20.0
+stream_weight_max: 20.0
+optimize_weight: 1
+stream_parameters[5]: 380.0, 15.0, 2.21, 0.32, 2.7
+stream_step[5]: 0.00003, 0.00004, 0.00006, 0.00004, 0.000004
+stream_min[5]: 350.0, 2.0, 0.0, 0.0, 0.1
+stream_max[5]: 400.0, 100.0, 3.14, 3.14, 25.0
+optimize_parameter[5]: 1, 1, 1, 1, 1
+stream_weight: -2.1
+stream_weight_step: 0.000001
+stream_weight_min: -20.0
+stream_weight_max: 20.0
+optimize_weight: 1
+stream_parameters[5]: 380.0, 15.0, 2.21, 0.32, 2.7
+stream_step[5]: 0.00003, 0.00004, 0.00006, 0.00004, 0.000004
+stream_min[5]: 350.0, 2.0, 0.0, 0.0, 0.1
+stream_max[5]: 400.0, 100.0, 3.14, 3.14, 25.0
+optimize_parameter[5]: 1, 1, 1, 1, 1
+convolve: 120
+sgr_coordinates: 0
+wedge: 85
+r[min,max,steps]: 16.0, 22.5, 700
+mu[min,max,steps]: 350, 400, 800
+nu[min,max,steps]: -1.25, 1.25, 320
+number_cuts: 1
+r_cut[min,max,steps][3]: 16.0, 22.5, 700
+mu_cut[min,max,steps][3]: 370, 380, 58
+nu_cut[min,max,steps][3]: -1.25, 1.25, 320
