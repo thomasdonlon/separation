@@ -15,15 +15,15 @@ if __name__ == "__main__":
     params = twg.ParamSet()
     params.wedge = 14
     params.background = [0.9965, 1.0, 0.56, 8.0, 1.0]
-    params.streams = [ [-0.5, 183.946, 28.5, 135., 120., 4.0],
-                       [-1.0, 213.341, 25., 50., 75., 2.0],
-                       [-1.5, 222.128, 35., 190., 55., 3.0],
-                       [-2.0, 153.657, 13., 75., 20., 5.0]
+    params.streams = [ [-0.8, 177., 26., 342., 183., 10.0],
+                       [-1.5, 212., 37., 99., 15., 3.0],
+                       [-1.8, 180., 25., 298., 81., 4.0],
+                       [-0.6, 152., 33., 352., 133., 7.0]
                        ]
     params.stripe = [(135.0, 235.0, 10), (-1.25, 1.25, 10), (16.0, 22.5, 10)]
     params.update_refs()
-    twg.build_stripe(params, filename="stars-t14-20-3.txt", num_stars=110000,
-        perturb_weight=0.20, perturb_params=(0.0, 0.79, -19.9), con=1, det=1, app=1)
+    twg.build_stripe(params, filename="stars-4s-3f-3.txt", num_stars=25000,
+        perturb_weight=0., perturb_params=(0.0, 0.79, -19.9), con=1, det=1, app=1)
     params.print_params()
     print("\n ### Done")
     """
