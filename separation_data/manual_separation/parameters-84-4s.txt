@@ -1,0 +1,62 @@
+number_parameters: 4
+background_weight: 0.999640292347558
+background_weight_step: 0.000001
+background_weight_min: 0.8
+background_weight_max: 1.0
+optimize_background_weight: 0
+background_parameters[4]: 1.0, 0.348674776708711, 25.9517910846623, 1.0
+background_step[4]: 0.02, 0.000004, 0.00008, 0.02
+background_min[4]: 0.0, 0.25, 1.0, 0.1
+background_max[4]: 3.0, 1.75, 30.0, 3.0
+optimize_parameter[4]: 0, 0, 0, 0
+number_streams: 4, 5
+stream_weight: -0.45588877479282
+stream_weight_step: 0.000001
+stream_weight_min: -20.0
+stream_weight_max: 20.0
+optimize_weight: 0
+stream_parameters[5]: 394.492310737437, 59.1979756934473, 1.0139811647987, 0.719805530217503, 18.717819934332
+stream_step[5]: 0.00003, 0.00004, 0.00006, 0.00004, 0.000004
+stream_min[5]: 350.0, 2.0, 0.0, 0.0, 0.1
+stream_max[5]: 400.0, 60.0, 3.14, 3.14, 25.0
+optimize_parameter[5]: 0, 0, 0, 0, 0
+stream_weight: -1.00142645929309
+stream_weight_step: 0.000001
+stream_weight_min: -20.0
+stream_weight_max: 20.0
+optimize_weight: 0
+stream_parameters[5]: 385.991919939617, 27.1485001151945, 2.33297451801624, 0.213035016049762, 1.27818217294814
+stream_step[5]: 0.00003, 0.00004, 0.00006, 0.00004, 0.000004
+stream_min[5]: 350.0, 2.0, 0.0, 0.0, 0.1
+stream_max[5]: 400.0, 60.0, 3.14, 3.14, 25.0
+optimize_parameter[5]: 0, 0, 0, 0, 0
+stream_weight: -3.58108122650404
+stream_weight_step: 0.000001
+stream_weight_min: -20.0
+stream_weight_max: 20.0
+optimize_weight: 0
+stream_parameters[5]: 361.920403697756, 22.4354564482038, 2.06831764073615, 1.65744536136818, 0.373555373183021
+stream_step[5]: 0.00003, 0.00004, 0.00006, 0.00004, 0.000004
+stream_min[5]: 350.0, 2.0, 0.0, 0.0, 0.1
+stream_max[5]: 400.0, 60.0, 3.14, 3.14, 25.0
+optimize_parameter[5]: 0, 0, 0, 0, 0
+stream_weight: 0.545505699597097
+stream_weight_step: 0.000001
+stream_weight_min: -20.0
+stream_weight_max: 20.0
+optimize_weight: 0
+stream_parameters[5]: 381.228159268461, 19.6957061993965, 1.80336514978889, 3.04624841948542, 4.72944772010733
+stream_step[5]: 0.00003, 0.00004, 0.00006, 0.00004, 0.000004
+stream_min[5]: 350.0, 2.0, 0.0, 0.0, 0.1
+stream_max[5]: 400.0, 60.0, 3.14, 3.14, 25.0
+optimize_parameter[5]: 0, 0, 0, 0, 0
+convolve: 120
+sgr_coordinates: 0
+wedge: 84
+r[min,max,steps]: 16.0, 22.5, 700
+mu[min,max,steps]: 350, 400, 800
+nu[min,max,steps]: -1.25, 1.25, 320
+number_cuts: 1
+r_cut[min,max,steps][3]: 16.0, 22.5, 700
+mu_cut[min,max,steps][3]: 370, 380, 58
+nu_cut[min,max,steps][3]: -1.25, 1.25, 320

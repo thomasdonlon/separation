@@ -274,11 +274,11 @@ def plotStarData(star_data, mode="radec", wrapra=False):
         if i < len(stripes) - 1: #do not perform on last stripe, there is nothing below it
             mu, nu = EqToGC(ra_tmp, dec_tmp, wedge+1, wrapra=wrapra)
 
-            for i in range(len(mu)):
-                if nu[i] < 1.25: #point is overlapping the below stripe
-                    ra_tmp[i] = -9999
-                    dec_tmp[i] = -9999
-                    r_tmp[i] = -9999
+            for j in range(len(mu)):
+                if nu[j] < 1.25: #point is overlapping the below stripe
+                    ra_tmp[j] = -9999
+                    dec_tmp[j] = -9999
+                    r_tmp[j] = -9999
 
         index = np.argwhere(ra_tmp==-9999)
         ra_tmp = np.delete(ra_tmp, index)
@@ -305,73 +305,74 @@ def plotStreamData(stream_data, mode="radec", wrapra=False, outline_streams=Fals
         stripe = stream_data[i]
 
         for j in range(len(stripe)):
-            epsilon = stripe[j][0]
-            mu = stripe[j][1]
-            r = stripe[j][2]
-            theta = stripe[j][3]
-            phi = stripe[j][4]
-            sigma = stripe[j][5]
+            if stripe[j][2] < 45 and not ((wedge == 80 and j == 0) or (wedge == 83 and j == 2) or (wedge == 85 and j == 1) or (wedge == 84 and j == 2)):
+                epsilon = stripe[j][0]
+                mu = stripe[j][1]
+                r = stripe[j][2]
+                theta = stripe[j][3]
+                phi = stripe[j][4]
+                sigma = stripe[j][5]
 
-            ra, dec = GCToEq(mu, 0, wedge, wrapra=wrapra)
-            dra, ddec, dr = thetaphi2draddec(theta, phi, ra, dec, r)
+                ra, dec = GCToEq(mu, 0, wedge, wrapra=wrapra)
+                dra, ddec, dr = thetaphi2draddec(theta, phi, ra, dec, r)
 
-            if mode == "radec":
-                if outline_streams and j == len(stripe)-1:
-                    '''
-                    #100 kpc limit
-                    plt.plot([18.67, 16.47, 17.12, 16.00], [2.43, 0.0, -2.44, -4.91], c='r')
-                    plt.plot([25.39, 24.15, 27.51, 23.14, 15.79, 15.87], [4.69, 0.0, -2.31, -4.75, -7.37, -9.82], c='b')
-                    plt.plot([34.87, 33.98, 39.10], [2.17, 0.0, -2.07], c='g')
-                    plt.plot([35.09, 37.04, 32.70, 29.31, 26.87, 21.90, 22.01], [4.33, 2.12, 0.0, -2.28, -4.64, -7.18, -9.57], c='magenta')
-                    '''
-                    #60 kpc limit
-                    plt.plot([25.87, 17.54, 9.76, 354.26-360], [4.67, 2.44, 0.0, -7.37], c='r')
-                    #plt.plot([34.58, 26.90, 5.80], [-4.35, -2.31, 4.99], c='teal')
-                    plt.plot([37.43, 30.59, 27.48, 21.28, 14.58, 8.60], [2.11, 0.0, -2.27, -4.80, -7.39, -9.98], c='b')
-                    plt.plot([36.89, 33.17, 29.34, 26.06, 22.8, 14.66], [2.12, 0.0, -2.27, -4.66, -7.14, -9.86], c='magenta')
-                    plt.plot([18.93, 16.44, 14.23], [2.42, 0.0, -7.40], c='orange')
-                plt.scatter(ra, dec, marker='o', c='navy', s=20)
-                plt.arrow(ra, dec, dra, ddec, color='navy', head_width=0.2)
-                #plt.annotate(str(j+(wedge-80)*4), (ra, dec), color='k', fontsize=25)
-                plt.annotate(str(wedge) + '.' + str(j+1), (ra, dec), color='k', fontsize=10)
-            elif mode == "radist":
-                if outline_streams and j == len(stripe)-1:
-                    '''
-                    #100 kpc limit
-                    plt.plot([18.67, 16.47, 17.12, 16.00], [25.28, 23.56, 30.84, 20.75], c='r')
-                    plt.plot([25.39, 24.15, 27.51, 23.14, 15.79, 15.87], [23.87, 18.26, 20.43, 20.63, 20.66, 20.66], c='b')
-                    plt.plot([34.87, 33.98, 39.10], [42.09, 46.32, 49.05], c='g')
-                    plt.plot([35.09, 37.04, 32.70, 29.31, 26.87, 21.90, 22.01], [26.47, 27.53, 27.11, 26.11, 27.34, 28.04, 28.04], c='magenta')
-                    '''
-                    #60 kpc limit
-                    plt.plot([25.87, 17.54, 9.76, 354.26-360], [23.67, 31.07, 40.16, 43.15], c='r')
-                    #plt.plot([34.58, 26.90, 5.80], [59.19, 47.73, 45.65], c='teal')
-                    plt.plot([37.43, 30.59, 27.48, 21.28, 14.58, 8.60], [25.80, 22.58, 21.09, 19.69, 20.32, 20.02], c='b')
-                    plt.plot([36.89, 33.17, 29.34, 26.06, 22.8, 14.66], [27.23, 27.46, 25.48, 27.14, 26.97, 26.13], c='magenta')
-                    plt.plot([18.93, 16.44, 14.23], [25.98, 26.84, 24.33], c='orange')
-                plt.scatter(ra, r, marker='o', c='navy', s=20)
-                plt.arrow(ra, r, dra, dr, color='navy', head_width=0.2)
-                #plt.annotate(str(j+(wedge-80)*4), (ra, r), color='k', fontsize=25)
-                plt.annotate(str(wedge) + '.' + str(j+1), (ra, r), color='k', fontsize=10)
-            elif mode == "rasigma":
-                if outline_streams and j == len(stripe)-1:
-                    '''
-                    #100 kpc limit
-                    plt.plot([18.67, 16.47, 17.12, 16.00], [1.49, 1.50, 1.41, 0.19], c='r')
-                    plt.plot([25.39, 24.15, 27.51, 23.14, 15.79, 15.87], [3.77, 5.75, 4.99, 5.40, 3.60, 3.60], c='b')
-                    plt.plot([34.87, 33.98, 39.10], [24.97, 10.37, 24.77], c='g')
-                    plt.plot([35.09, 37.04, 32.70, 29.31, 26.87, 21.90, 22.01], [1.44, 1.18, 1.43, 1.44, 1.78, 0.80, 0.80], c='magenta')
-                    '''
-                    #60 kpc limit
-                    plt.plot([25.87, 17.54, 9.76, 354.26-360], [4.03, 24.01, 22.32, 23.51], c='r')
-                    #plt.plot([34.58, 26.90, 5.80], [18.71, 23.22, 2.85], c='teal')
-                    plt.plot([37.43, 30.59, 27.48, 21.28, 14.58, 8.60], [4.65, 4.72, 5.18, 4.72, 3.84, 4.59], c='b')
-                    plt.plot([36.89, 33.17, 29.34, 26.06, 22.8, 14.66], [0.95, 0.85, 1.21, 1.27, 0.91, 0.85], c='magenta')
-                    plt.plot([18.93, 16.44, 14.23], [1.51, 1.40, 0.22], c='orange')
-                plt.scatter(ra, sigma, marker='o', c='navy', s=20)
-                plt.annotate(str(wedge) + '.' + str(j+1), (ra, sigma), color='k', fontsize=10)
-            else:
-                print("error <plotStreamData()>: mode must be 'radec', 'radist', or 'rasigma'")
+                if mode == "radec":
+                    if outline_streams and j == len(stripe)-1:
+                        '''
+                        #100 kpc limit
+                        plt.plot([18.67, 16.47, 17.12, 16.00], [2.43, 0.0, -2.44, -4.91], c='r')
+                        plt.plot([25.39, 24.15, 27.51, 23.14, 15.79, 15.87], [4.69, 0.0, -2.31, -4.75, -7.37, -9.82], c='b')
+                        plt.plot([34.87, 33.98, 39.10], [2.17, 0.0, -2.07], c='g')
+                        plt.plot([35.09, 37.04, 32.70, 29.31, 26.87, 21.90, 22.01], [4.33, 2.12, 0.0, -2.28, -4.64, -7.18, -9.57], c='magenta')
+                        '''
+                        #60 kpc limit
+                        plt.plot([25.87, 17.54, 9.76, 354.26-360], [4.67, 2.44, 0.0, -7.37], c='r')
+                        #plt.plot([34.58, 26.90, 5.80], [-4.35, -2.31, 4.99], c='teal')
+                        plt.plot([37.43, 30.59, 27.48, 21.28, 14.58, 8.60], [2.11, 0.0, -2.27, -4.80, -7.39, -9.98], c='b')
+                        plt.plot([35.04, 36.89, 33.17, 29.34, 26.06, 22.8], [4.33, 2.12, 0.0, -2.27, -4.66, -7.14], c='magenta')
+                        plt.plot([18.93, 16.44, 14.66], [2.42, 0.0, -9.86], c='orange')
+                    plt.scatter(ra, dec, marker='o', c='navy', s=20)
+                    plt.arrow(ra, dec, dra, ddec, color='navy', head_width=0.2)
+                    #plt.annotate(str(j+(wedge-80)*4), (ra, dec), color='k', fontsize=25)
+                    plt.annotate(str(wedge) + '.' + str(j+1), (ra, dec), color='k', fontsize=10)
+                elif mode == "radist":
+                    if outline_streams and j == len(stripe)-1:
+                        '''
+                        #100 kpc limit
+                        plt.plot([18.67, 16.47, 17.12, 16.00], [25.28, 23.56, 30.84, 20.75], c='r')
+                        plt.plot([25.39, 24.15, 27.51, 23.14, 15.79, 15.87], [23.87, 18.26, 20.43, 20.63, 20.66, 20.66], c='b')
+                        plt.plot([34.87, 33.98, 39.10], [42.09, 46.32, 49.05], c='g')
+                        plt.plot([35.09, 37.04, 32.70, 29.31, 26.87, 21.90, 22.01], [26.47, 27.53, 27.11, 26.11, 27.34, 28.04, 28.04], c='magenta')
+                        '''
+                        #60 kpc limit
+                        plt.plot([25.87, 17.54, 9.76, 354.26-360], [23.67, 31.07, 40.16, 43.15], c='r')
+                        #plt.plot([34.58, 26.90, 5.80], [59.19, 47.73, 45.65], c='teal')
+                        plt.plot([37.43, 30.59, 27.48, 21.28, 14.58, 8.60], [25.80, 22.58, 21.09, 19.69, 20.32, 20.02], c='b')
+                        plt.plot([35.04, 36.89, 33.17, 29.34, 26.06, 22.8], [26.55, 27.23, 27.46, 25.48, 27.14, 26.97], c='magenta')
+                        plt.plot([18.93, 16.44, 14.66], [25.98, 26.84, 26.13], c='orange')
+                    plt.scatter(ra, r, marker='o', c='navy', s=20)
+                    plt.arrow(ra, r, dra, dr, color='navy', head_width=0.2)
+                    #plt.annotate(str(j+(wedge-80)*4), (ra, r), color='k', fontsize=25)
+                    plt.annotate(str(wedge) + '.' + str(j+1), (ra, r), color='k', fontsize=10)
+                elif mode == "rasigma":
+                    if outline_streams and j == len(stripe)-1:
+                        '''
+                        #100 kpc limit
+                        plt.plot([18.67, 16.47, 17.12, 16.00], [1.49, 1.50, 1.41, 0.19], c='r')
+                        plt.plot([25.39, 24.15, 27.51, 23.14, 15.79, 15.87], [3.77, 5.75, 4.99, 5.40, 3.60, 3.60], c='b')
+                        plt.plot([34.87, 33.98, 39.10], [24.97, 10.37, 24.77], c='g')
+                        plt.plot([35.09, 37.04, 32.70, 29.31, 26.87, 21.90, 22.01], [1.44, 1.18, 1.43, 1.44, 1.78, 0.80, 0.80], c='magenta')
+                        '''
+                        #60 kpc limit
+                        plt.plot([25.87, 17.54, 9.76, 354.26-360], [4.03, 24.01, 22.32, 23.51], c='r')
+                        #plt.plot([34.58, 26.90, 5.80], [18.71, 23.22, 2.85], c='teal')
+                        plt.plot([37.43, 30.59, 27.48, 21.28, 14.58, 8.60], [4.65, 4.72, 5.18, 4.72, 3.84, 4.59], c='b')
+                        plt.plot([35.04, 36.89, 33.17, 29.34, 26.06, 22.8], [1.39, 0.95, 0.85, 1.21, 1.27, 0.91], c='magenta')
+                        plt.plot([18.93, 16.44, 14.66], [1.51, 1.40, 0.85], c='orange')
+                    plt.scatter(ra, sigma, marker='o', c='navy', s=20)
+                    plt.annotate(str(wedge) + '.' + str(j+1), (ra, sigma), color='k', fontsize=10)
+                else:
+                    print("error <plotStreamData()>: mode must be 'radec', 'radist', or 'rasigma'")
 
 def printData(filename, stream_data, star_data, mode="radec", wrapra=False):
 
@@ -443,8 +444,8 @@ def printData(filename, stream_data, star_data, mode="radec", wrapra=False):
     plt.plot([25.87, 17.54, 9.76, 354.26-360], [6880, 9339, 7582, 4865], c='r')
     #plt.plot([34.58, 26.90, 5.80], [5371, 7162, 1298], c='teal')
     plt.plot([37.43, 30.59, 27.48, 21.28, 14.58, 8.60], [12228, 16902, 18184, 14621, 14086, 21055], c='b')
-    plt.plot([36.89, 33.17, 29.34, 26.06, 22.8, 14.66], [2949, 2602, 2713, 3112, 1959, 592], c='magenta')
-    plt.plot([18.93, 16.44, 14.23], [943, 784, 20], c='orange')
+    plt.plot([35.04, 36.89, 33.17, 29.34, 26.06, 22.8], [1081, 2949, 2602, 2713, 3112, 1959], c='magenta')
+    plt.plot([18.93, 16.44, 14.66], [943, 784, 592], c='orange')
 
     plt.title('Separation Application: South Redo 3')
     plt.xlabel('RA')
@@ -543,7 +544,7 @@ plt.title('Separation Application: South Redo 3')
 plt.xlabel('RA')
 plt.ylabel('Dist')
 plt.xlim((45, -15))
-plt.ylim((0,60))
+plt.ylim((0,45))
 
 #print out plot
 plt.savefig("/home/donlot/Desktop/separation/figures/South_Redo_3_ra_dist")
@@ -590,7 +591,7 @@ plt.title('Separation Application: South Redo 3')
 plt.xlabel('RA')
 plt.ylabel('Dist')
 plt.xlim((45, -15))
-plt.ylim((0,60))
+plt.ylim((0,45))
 
 #print out plot
 plt.savefig("/home/donlot/Desktop/separation/figures/South_Redo_3_ra_dist_with_streams")
